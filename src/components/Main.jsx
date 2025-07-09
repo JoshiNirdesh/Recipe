@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import ClaudeRecipe from "./ClaudeRecipe";
+import IngredientsList from "./IngredientsList";
 
 const Main = () => {
   const [ingredients, setIngredients] = useState([
@@ -31,27 +33,12 @@ const Main = () => {
         <button>Add ingredient</button>
       </form>
       {ingredients.length > 0 && (
-        <section>
-          <h2>Ingredients on hand:</h2>
-          {ingredients.map((ingredients, index) => (
-            <ul key={index}>{ingredients}</ul>
-          ))}
-          {ingredients.length > 3 && (
-            <div className="get-recipe-container">
-              <div>
-                <h3>Ready for recipe?</h3>
-                <p>Generate a recipe from your list of ingredients</p>
-              </div>
-              <button onClick={toggleRecipeShown}>Get a recipe</button>
-            </div>
-          )}
-        </section>
+        <IngredientsList
+          ingredients={ingredients}
+          toggleRecipeShown={toggleRecipeShown}
+        />
       )}
-      {recipeShown && (
-        <section>
-          <h1>Recipe</h1>
-        </section>
-      )}
+      {recipeShown && <ClaudeRecipe />}
     </main>
   );
 };
